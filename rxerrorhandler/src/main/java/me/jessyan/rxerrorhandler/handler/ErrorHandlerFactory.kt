@@ -13,35 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.rxerrorhandler.handler;
+package me.jessyan.rxerrorhandler.handler
 
-import android.content.Context;
-
-import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
+import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
 
 /**
  * ================================================
  * Created by JessYan on 9/2/2016 13:47
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
+ * [Contact me](mailto:jess.yan.effort@gmail.com)
+ * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-public class ErrorHandlerFactory {
-    public final String TAG = this.getClass().getSimpleName();
-    private Context mContext;
-    private ResponseErrorListener mResponseErrorListener;
-
-    public ErrorHandlerFactory(Context mContext, ResponseErrorListener mResponseErrorListener) {
-        this.mResponseErrorListener = mResponseErrorListener;
-        this.mContext = mContext;
-    }
+class ErrorHandlerFactory(private val responseErrorListener: ResponseErrorListener?) {
 
     /**
      * 处理错误
      *
      * @param throwable
      */
-    public void handleError(Throwable throwable) {
-        mResponseErrorListener.handleResponseError(mContext, throwable);
+    fun handleError(throwable: Throwable?) {
+        responseErrorListener?.handleResponseError(throwable)
     }
 }

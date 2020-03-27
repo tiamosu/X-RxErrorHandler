@@ -13,46 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.rxerrorhandler.handler;
+package me.jessyan.rxerrorhandler.handler
 
-import io.reactivex.Observer;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import io.reactivex.rxjava3.annotations.NonNull
+import me.jessyan.rxerrorhandler.core.RxErrorHandler
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 
 /**
  * ================================================
- * Created by JessYan on 9/2/2016 14:41
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
+ * Created by JessYan on 9/22/2017 15:10
+ * [Contact me](mailto:jess.yan.effort@gmail.com)
+ * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-public abstract class ErrorHandleSubscriber<T> implements Observer<T> {
-    private ErrorHandlerFactory mHandlerFactory;
+abstract class ErrorHandleSubscriberOfFlowable<T>(rxErrorHandler: RxErrorHandler) : Subscriber<T> {
+    private val handlerFactory: ErrorHandlerFactory? = rxErrorHandler.handlerFactory
 
-    public ErrorHandleSubscriber(RxErrorHandler rxErrorHandler) {
-        this.mHandlerFactory = rxErrorHandler.getHandlerFactory();
-    }
+    override fun onSubscribe(s: Subscription) {}
 
+    override fun onComplete() {}
 
-    @Override
-    public void onSubscribe(@NonNull Disposable d) {
-
-    }
-
-
-    @Override
-    public void onComplete() {
-
-    }
-
-
-    @Override
-    public void onError(@NonNull Throwable t) {
-        t.printStackTrace();
+    override fun onError(t: @NonNull Throwable?) {
+        t?.printStackTrace()
         //如果你某个地方不想使用全局错误处理,则重写 onError(Throwable) 并将 super.onError(e); 删掉
         //如果你不仅想使用全局错误处理,还想加入自己的逻辑,则重写 onError(Throwable) 并在 super.onError(e); 后面加入自己的逻辑
-        mHandlerFactory.handleError(t);
+        handlerFactory?.handleError(t)
     }
 }
-

@@ -1,15 +1,18 @@
-apply plugin: 'com.android.application'
+apply {
+    plugin "com.android.application"
+    plugin "kotlin-android"
+    plugin "kotlin-android-extensions"
+    plugin "kotlin-kapt"
+}
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
-
+    compileSdkVersion compile_sdk_version
     defaultConfig {
         applicationId "me.jessyan.rxerrorhandler.demo"
-        minSdkVersion 14
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
     }
     buildTypes {
         release {
@@ -21,11 +24,18 @@ android {
         abortOnError false
         warning 'InvalidPackage'
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
-//    implementation 'me.jessyan:rxerrorhandler:2.1.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.1'
+
     implementation project(':rxerrorhandler')
 }

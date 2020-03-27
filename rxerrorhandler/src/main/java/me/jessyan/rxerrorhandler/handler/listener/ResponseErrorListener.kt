@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.rxerrorhandler.handler.listener;
-
-import android.content.Context;
+package me.jessyan.rxerrorhandler.handler.listener
 
 /**
  * ================================================
  * Created by JessYan on 9/2/2016 13:58
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
+ * [Contact me](mailto:jess.yan.effort@gmail.com)
+ * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-public interface ResponseErrorListener {
-    void handleResponseError(Context context, Throwable t);
+interface ResponseErrorListener {
+    fun handleResponseError(t: Throwable?)
 
-    ResponseErrorListener EMPTY = new ResponseErrorListener() {
-        @Override
-        public void handleResponseError(Context context, Throwable t) {
+    companion object {
 
-
+        @JvmField
+        val EMPTY: ResponseErrorListener = object : ResponseErrorListener {
+            override fun handleResponseError(t: Throwable?) {}
         }
-    };
+    }
 }
