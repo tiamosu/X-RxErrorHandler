@@ -1,19 +1,13 @@
 # RxErrorHandler
-[ ![Jcenter](https://img.shields.io/badge/Jcenter-v2.1.1-brightgreen.svg?style=flat-square) ](https://bintray.com/jessyancoding/maven/rxerrorhandler/2.1.1/link)
-[ ![Build Status](https://travis-ci.org/JessYanCoding/RxErrorHandler.svg?branch=2.x) ](https://travis-ci.org/JessYanCoding/RxErrorHandler)
-[ ![API](https://img.shields.io/badge/API-9%2B-blue.svg?style=flat-square) ](https://developer.android.com/about/versions/android-2.3.html)
-[ ![License](http://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square) ](http://www.apache.org/licenses/LICENSE-2.0)
-[ ![Author](https://img.shields.io/badge/Author-JessYan-orange.svg?style=flat-square) ](https://www.jianshu.com/u/1d0c0bc634db)
-[ ![QQ-Group](https://img.shields.io/badge/QQ%E7%BE%A4-455850365%20%7C%20301733278-orange.svg?style=flat-square) ](https://shang.qq.com/wpa/qunwpa?idkey=7e59e59145e6c7c68932ace10f52790636451f01d1ecadb6a652b1df234df753)
 
-## Error Handle Of Rxjava
+## Error Handle Of RxJava3
 
 ## Download
 
-``` gradle
-implementation 'me.jessyan:rxerrorhandler:2.1.1' //rxjava2
+[ ![Download](https://api.bintray.com/packages/weixia/maven/x-rxerrorhandler/images/download.svg) ](https://bintray.com/weixia/maven/x-rxerrorhandler/_latestVersion)
 
-implementation 'me.jessyan:rxerrorhandler:1.0.1' //rxjava1
+``` gradle
+implementation 'me.tiamosu:x-rxerrorhandler:3.0.0'
 ```
 
 ## Initialization
@@ -21,10 +15,10 @@ implementation 'me.jessyan:rxerrorhandler:1.0.1' //rxjava1
 ``` java
   RxErrorHandler rxErrorHandler = RxErrorHandler 
                 .builder()
-                .with(this)
+                .with()
                 .responseErrorListener(new ResponseErrorListener() {
                     @Override
-                    public void handleResponseError(Context context, Throwable t) {
+                    public void handleResponseError(Throwable t) {
                         if (t instanceof UnknownHostException) {
                             //do something ...
                         } else if (t instanceof SocketTimeoutException) {
@@ -46,9 +40,7 @@ implementation 'me.jessyan:rxerrorhandler:1.0.1' //rxjava1
             .subscribe(new ErrorHandleSubscriber<Object>(rxErrorHandler) {
                     @Override
                     public void onNext(Object o) {
-
                     }
-
                 });
 
   //Backpressure
@@ -57,12 +49,10 @@ implementation 'me.jessyan:rxerrorhandler:1.0.1' //rxjava1
           .retryWhen(new RetryWithDelayOfFlowable(3, 2))//retry(http connect timeout)
           .subscribe(new ErrorHandleSubscriberOfFlowable<Object>(rxErrorHandler) {
                    @Override
-               public void onNext(Object o) {
-
-                  }
-               });
+                   public void onNext(Object o) {
+                   }
+                });
 ```
-
 
 ## About Me
 * **Email**: <jess.yan.effort@gmail.com>  
