@@ -13,45 +13,47 @@ implementation 'me.tiamosu:x-rxerrorhandler:3.0.0'
 ## Initialization
 
 ``` java
-  RxErrorHandler rxErrorHandler = RxErrorHandler 
-                .builder()
+        val rxErrorHandler = builder()
                 .with()
-                .responseErrorListener(new ResponseErrorListener() {
-                    @Override
-                    public void handleResponseError(Throwable t) {
-                        if (t instanceof UnknownHostException) {
+                .responseErrorListener(object : ResponseErrorListener {
+                    override fun handleResponseError(t: Throwable?) {
+                        if (t is UnknownHostException) {
                             //do something ...
-                        } else if (t instanceof SocketTimeoutException) {
+                        } else if (t is SocketTimeoutException) {
+                            //do something ...
+                        } else if (t is ParseException || t is JSONException) {
                             //do something ...
                         } else {
                             //handle other Exception ...
                         }
-                        Log.w(TAG, "Error handle");
+                        Log.w(tag, "Error handle")
                     }
-                }).build();
+                }).build()
 ```
 
 ## Usage
 
 ``` java
-  Observable
-            .error(new Exception("Error"))
-            .retryWhen(new RetryWithDelay(3, 2))//retry(http connect timeout) 
-            .subscribe(new ErrorHandleSubscriber<Object>(rxErrorHandler) {
-                    @Override
-                    public void onNext(Object o) {
+        val rxErrorHandler = (applicationContext as App).rxErrorHandler
+        Observable
+                .error<Any>(Exception("Error"))
+                .retryWhen(RetryWithDelay(3, 2)) //retry(http connect timeout)
+                .subscribe(object : ErrorHandleSubscriber<Any>(rxErrorHandler) {
+                    override fun onNext(o: Any) {}
+                    override fun onError(t: Throwable?) {
+                        Log.e("xia", "t1:" + t?.message)
                     }
-                });
+                })
 
-  //Backpressure
-  Flowable
-          .error(new Exception("Error"))
-          .retryWhen(new RetryWithDelayOfFlowable(3, 2))//retry(http connect timeout)
-          .subscribe(new ErrorHandleSubscriberOfFlowable<Object>(rxErrorHandler) {
-                   @Override
-                   public void onNext(Object o) {
-                   }
-                });
+        Flowable //Backpressure
+                .error<Any>(Exception("Error"))
+                .retryWhen(RetryWithDelayOfFlowable(3, 2)) //retry(http connect timeout)
+                .subscribe(object : ErrorHandleSubscriberOfFlowable<Any>(rxErrorHandler) {
+                    override fun onNext(o: Any) {}
+                    override fun onError(t: Throwable?) {
+                        Log.e("xia", "t2:" + t?.message)
+                    }
+                })
 ```
 
 ## About Me

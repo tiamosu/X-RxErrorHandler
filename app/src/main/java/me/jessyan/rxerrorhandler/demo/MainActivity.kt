@@ -41,10 +41,10 @@ class MainActivity : AppCompatActivity() {
         Observable
                 .error<Any>(Exception("Error"))
                 .retryWhen(RetryWithDelay(3, 2)) //retry(http connect timeout)
-                .subscribe(object : ErrorHandleSubscriber<Any>(rxErrorHandler!!) {
+                .subscribe(object : ErrorHandleSubscriber<Any>(rxErrorHandler) {
                     override fun onNext(o: Any) {}
                     override fun onError(t: Throwable?) {
-                        Log.e("xia", "t1:" + t!!.message)
+                        Log.e("xia", "t1:" + t?.message)
                     }
                 })
 
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 .subscribe(object : ErrorHandleSubscriberOfFlowable<Any>(rxErrorHandler) {
                     override fun onNext(o: Any) {}
                     override fun onError(t: Throwable?) {
-                        Log.e("xia", "t2:" + t!!.message)
+                        Log.e("xia", "t2:" + t?.message)
                     }
                 })
     }

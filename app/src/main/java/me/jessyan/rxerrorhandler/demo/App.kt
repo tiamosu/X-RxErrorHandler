@@ -34,7 +34,7 @@ import java.net.UnknownHostException
  */
 class App : Application() {
     private val tag = javaClass.simpleName
-    var rxErrorHandler: RxErrorHandler? = null
+    lateinit var rxErrorHandler: RxErrorHandler
         private set
 
     override fun onCreate() {
