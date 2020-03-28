@@ -1,5 +1,7 @@
 package me.jessyan.rxerrorhandler.handler.listener
 
+import android.content.Context
+
 /**
  * ================================================
  * Created by JessYan on 9/2/2016 13:58
@@ -8,13 +10,13 @@ package me.jessyan.rxerrorhandler.handler.listener
  * ================================================
  */
 interface ResponseErrorListener {
-    fun handleResponseError(t: Throwable?)
+    fun handleResponseError(context: Context, t: Throwable?)
 
     companion object {
 
         @JvmField
         val EMPTY: ResponseErrorListener = object : ResponseErrorListener {
-            override fun handleResponseError(t: Throwable?) {}
+            override fun handleResponseError(context: Context, t: Throwable?) {}
         }
     }
 }

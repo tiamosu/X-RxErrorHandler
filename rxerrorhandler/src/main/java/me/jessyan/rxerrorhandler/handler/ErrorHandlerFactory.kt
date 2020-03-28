@@ -1,5 +1,6 @@
 package me.jessyan.rxerrorhandler.handler
 
+import android.content.Context
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
 
 /**
@@ -9,14 +10,14 @@ import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
  * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-class ErrorHandlerFactory(private val responseErrorListener: ResponseErrorListener?) {
+class ErrorHandlerFactory(
+        private val context: Context,
+        private val responseErrorListener: ResponseErrorListener) {
 
     /**
      * 处理错误
-     *
-     * @param throwable
      */
     fun handleError(throwable: Throwable?) {
-        responseErrorListener?.handleResponseError(throwable)
+        responseErrorListener.handleResponseError(context, throwable)
     }
 }

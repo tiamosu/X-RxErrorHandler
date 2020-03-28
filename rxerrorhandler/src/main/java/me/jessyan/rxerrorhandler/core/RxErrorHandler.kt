@@ -1,5 +1,6 @@
 package me.jessyan.rxerrorhandler.core
 
+import android.content.Context
 import me.jessyan.rxerrorhandler.handler.ErrorHandlerFactory
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
 
@@ -14,10 +15,12 @@ class RxErrorHandler private constructor(builder: Builder) {
     val handlerFactory: ErrorHandlerFactory? = builder.errorHandlerFactory
 
     class Builder {
+        private var context: Context? = null
         private var responseErrorListener: ResponseErrorListener? = null
         var errorHandlerFactory: ErrorHandlerFactory? = null
 
-        fun with(): Builder {
+        fun with(context: Context): Builder {
+            this.context = context
             return this
         }
 
@@ -27,7 +30,14 @@ class RxErrorHandler private constructor(builder: Builder) {
         }
 
         fun build(): RxErrorHandler {
-            errorHandlerFactory = ErrorHandlerFactory(responseErrorListener)
+            checkNotNull(context, {
+                "Context is required，you should load with(context)"
+            })
+            checkNotNull(responseErrorListener, {
+                "ResponseErrorListener is required，you should load responseErrorListener(responseErrorListener)"
+            })
+
+            errorHandlerFactory = ErrorHandlerFactory(context!!, responseErrorListener!!)
             return RxErrorHandler(this)
         }
     }

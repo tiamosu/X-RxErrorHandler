@@ -1,6 +1,7 @@
 package me.jessyan.rxerrorhandler.demo
 
 import android.app.Application
+import android.content.Context
 import android.net.ParseException
 import android.util.Log
 import me.jessyan.rxerrorhandler.core.RxErrorHandler
@@ -26,9 +27,9 @@ class App : Application() {
         super.onCreate()
         //Initialization
         rxErrorHandler = builder()
-                .with()
+                .with(this)
                 .responseErrorListener(object : ResponseErrorListener {
-                    override fun handleResponseError(t: Throwable?) {
+                    override fun handleResponseError(context: Context, t: Throwable?) {
                         if (t is UnknownHostException) {
                             //do something ...
                         } else if (t is SocketTimeoutException) {
