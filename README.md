@@ -7,7 +7,7 @@
 [ ![Download](https://api.bintray.com/packages/weixia/maven/x-rxerrorhandler/images/download.svg) ](https://bintray.com/weixia/maven/x-rxerrorhandler/_latestVersion)
 
 ``` gradle
-implementation 'me.tiamosu:x-rxerrorhandler:3.0.0'
+implementation 'me.tiamosu:x-rxerrorhandler:3.0.1'
 ```
 
 ## Initialization
