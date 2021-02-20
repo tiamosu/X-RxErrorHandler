@@ -12,7 +12,8 @@ import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
  */
 class ErrorHandlerFactory(
         private val context: Context,
-        private val responseErrorListener: ResponseErrorListener) {
+        private val responseErrorListener: ResponseErrorListener
+) {
 
     /**
      * 处理错误

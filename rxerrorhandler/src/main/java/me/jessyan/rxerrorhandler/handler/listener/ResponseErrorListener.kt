@@ -15,7 +15,7 @@ interface ResponseErrorListener {
     companion object {
 
         @JvmField
-        val EMPTY: ResponseErrorListener = object : ResponseErrorListener {
+        val EMPTY = object : ResponseErrorListener {
             override fun handleResponseError(context: Context, t: Throwable?) {}
         }
     }

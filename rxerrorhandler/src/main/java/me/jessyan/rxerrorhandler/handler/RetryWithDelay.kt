@@ -14,14 +14,17 @@ import java.util.concurrent.TimeUnit
  * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-class RetryWithDelay(private val maxRetries: Int, private val retryDelaySecond: Int) : Function<Observable<Throwable?>, ObservableSource<*>> {
+class RetryWithDelay(
+        private val maxRetries: Int,
+        private val retryDelaySecond: Int
+) : Function<Observable<Throwable?>, ObservableSource<*>> {
     private val tag = this.javaClass.simpleName
     private var retryCount = 0
 
     @Throws(Exception::class)
     override fun apply(observable: @NonNull Observable<Throwable?>): ObservableSource<*> {
         return observable
-                .flatMap {
+                .flatMap { throwable ->
                     if (++retryCount <= maxRetries) {
                         // When this Observable calls onNext, the original Observable will be retried (i.e. re-subscribed).
                         Log.d(tag, "Observable get error, it will try after " + retryDelaySecond
@@ -29,7 +32,7 @@ class RetryWithDelay(private val maxRetries: Int, private val retryDelaySecond: 
                         return@flatMap Observable.timer(retryDelaySecond.toLong(), TimeUnit.SECONDS)
                     }
                     // Max retries hit. Just pass the error along.
-                    return@flatMap Observable.error<Any>(it)
+                    return@flatMap Observable.error<Any>(throwable)
                 }
     }
 }
