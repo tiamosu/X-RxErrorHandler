@@ -1,7 +1,7 @@
 apply {
     plugin "com.android.library"
     plugin "kotlin-android"
-    plugin "kotlin-android-extensions"
+    plugin "kotlin-parcelize"
     plugin "kotlin-kapt"
 }
 
@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    compileOnly 'io.reactivex.rxjava3:rxjava:3.0.4'
+    compileOnly 'io.reactivex.rxjava3:rxjava:3.0.10'
 }
 
 apply from: 'bintray.gradle'
