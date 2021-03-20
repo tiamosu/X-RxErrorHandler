@@ -3,11 +3,20 @@
 ## Error Handle Of RxJava3
 
 ## Download
+[![](https://jitpack.io/v/tiamosu/X-RxErrorHandler.svg)](https://jitpack.io/#tiamosu/X-RxErrorHandler)
 
-[ ![Download](https://api.bintray.com/packages/weixia/maven/x-rxerrorhandler/images/download.svg) ](https://bintray.com/weixia/maven/x-rxerrorhandler/_latestVersion)
+```groovy
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
 
-``` gradle
-implementation 'me.tiamosu:x-rxerrorhandler:3.0.3'
+``` groovy
+implementation 'com.github.tiamosu:X-RxErrorHandler:3.0.4'
 ```
 
 ## Initialization
