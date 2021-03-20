@@ -1,0 +1,2 @@
+-keep class me.jessyan.rxerrorhandler.** { *; }
+-keep interface me.jessyan.rxerrorhandler.** { *; }
