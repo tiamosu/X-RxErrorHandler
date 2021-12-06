@@ -11,7 +11,8 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
  * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-abstract class ErrorHandleSubscriber<T>(private val rxErrorHandler: RxErrorHandler) : Observer<T> {
+abstract class ErrorHandleSubscriber<T : Any>(private val rxErrorHandler: RxErrorHandler) :
+    Observer<T> {
 
     override fun onSubscribe(d: Disposable) {}
 
