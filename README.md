@@ -2,21 +2,22 @@
 ## 本项目fork自([JessYanCoding/RxErrorHandler](https://github.com/JessYanCoding/RxErrorHandler))
 
 ## Download
-[![](https://jitpack.io/v/tiamosu/X-RxErrorHandler.svg)](https://jitpack.io/#tiamosu/X-RxErrorHandler)
 
 ```groovy
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven { url 'https://jitpack.io' }
+        mavenCentral()
+
+        //或者 sonatype
+        maven {url "https://s01.oss.sonatype.org/content/groups/public"}
+        maven {url "https://s01.oss.sonatype.org/content/repositories/releases"}
     }
 }
 ```
 
 ``` groovy
-implementation 'com.github.tiamosu:X-RxErrorHandler:3.0.4'
+implementation 'com.gitee.tiamosu:RxErrorHandler:4.0.0'
 ```
 
 ## 感谢原作者的贡献
-
